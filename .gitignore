@@ -1,0 +1,64 @@
+# Prerequisites
+*.d
+# emacs tmp file
+*~
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+*/obj
+*/lib
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+*/bin/exe.*
+*/dev/exe.test.*
+
+# root compiled files
+*_ACLiC_*
+
+*.root
+
+*.pyc
+
+*.png
+*.pdf
+*.jpg
+
+*/.*.swp
+*/.*.swo
+.*.swp
+.*.swo
+*/qjobs
+*/*/qjobs
+
+# system running file
+*/.nfs*
+*/*/.nfs*
+storeroot
+storefig
+*.dat
+*.tar
