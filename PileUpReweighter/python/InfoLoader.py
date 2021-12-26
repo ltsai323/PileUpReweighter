@@ -2,18 +2,20 @@
 
 import json
 import os
+import PythonToolBox.PythonToolBox.LogMgr as LogMgr
+mylog=LogMgr.GetLogger(__name__)
 
 
 class InfoLoader(object):
     def __init__(self, jsonname):
-        self._dir=jsonname[0: jsonname.rfind('.')]
+        #self._dir=jsonname[0: jsonname.rfind('.')] # preserve original path to the output files
+        self._dir=jsonname[jsonname.rfind('/')+1: jsonname.rfind('.')] # put outputs to current directory
 
         with open(jsonname,'r') as fin:
             loadjson=json.load(fin)
             self._gitfile =loadjson['gitsource']
             self._afsfiles=loadjson['dataTarget']
             self._outnames=[ self.outputFilename(fname) for fname in self._afsfiles ]
-            # for a in self._outnames: print a
 
             InfoLoader.downloadGitFile( self._gitfile )
 
@@ -29,7 +31,7 @@ class InfoLoader(object):
 
         return InfoLoader.findNumberSet(line_probVal[0])
     def GetIOFiles(self):
-        return  [ {'iFile': afsfile, 'oFile': outname} for afsfile, outname in zip(self._afsfiles, self._outnames) ]
+        return  [ (afsfile, outname) for afsfile, outname in zip(self._afsfiles, self._outnames) ]
 
     @staticmethod
     def findNumberSet(line):
@@ -47,19 +49,20 @@ class InfoLoader(object):
         nameidx1=origpath.rfind('/')
         nameidx2=origpath.rfind('.')
         extractedName=origpath[nameidx1+1:nameidx2]
-        #print extractedName
         return '%s/puweights_%s.root' % (self._dir, extractedName)
 
     @staticmethod
     def downloadGitFile(gitlink):
-        print 'downloading from github...'
+        mylog.info('downloading from github...')
         os.system( 'curl -o tmpfile.py -O %s' % (gitlink) )
     def __del__(self):
         os.system('touch tmpfile.py && rm tmpfile.py')
 
 if __name__ == '__main__':
+    LogMgr.InitLogger(level='info')
+    mylog=LogMgr.GetLogger(__name__)
     processor=InfoLoader( 'data/2016ReReco_Moriond17.json' )
 
     print processor.ExtractProbabilityDesityValues()
-    for IOFile in  processor.GetIOFiles():
-        print '  --  '.join( ( IOFile['iFile'], IOFile['oFile'] ) )
+    for iFile, oFile in  processor.GetIOFiles():
+        print 'GetIOFile() : output file: %s and input file: %s'%(oFile,iFile)
