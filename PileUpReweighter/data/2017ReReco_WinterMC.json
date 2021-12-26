@@ -1,0 +1,13 @@
+{
+    "gitsource":
+        "https://raw.githubusercontent.com/cms-sw/cmssw/master/SimGeneral/MixingModule/python/mix_2017_25ns_WinterMC_PUScenarioV1_PoissonOOTPU_cfi.py",
+    "dataTarget": [
+        "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions17/13TeV/PileUp/PrelLum13TeV/PileupHistogram-goldenJSON-13tev-2017-66000ub-99bins.root", 
+        "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions17/13TeV/PileUp/PrelLum13TeV/PileupHistogram-goldenJSON-13tev-2017-66000ub.root", 
+        "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions17/13TeV/PileUp/PrelLum13TeV/PileupHistogram-goldenJSON-13tev-2017-69200ub-99bins.root", 
+        "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions17/13TeV/PileUp/PrelLum13TeV/PileupHistogram-goldenJSON-13tev-2017-69200ub.root", 
+        "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions17/13TeV/PileUp/PrelLum13TeV/PileupHistogram-goldenJSON-13tev-2017-72400ub-99bins.root", 
+        "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions17/13TeV/PileUp/PrelLum13TeV/PileupHistogram-goldenJSON-13tev-2017-72400ub.root", 
+        "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions17/13TeV/PileUp/PrelLum13TeV/PileupHistogram-goldenJSON-13tev-2017-80000ub.root", 
+    ]
+}

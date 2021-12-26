@@ -54,9 +54,11 @@ class InfoLoader(object):
     def downloadGitFile(gitlink):
         print 'downloading from github...'
         os.system( 'curl -o tmpfile.py -O %s' % (gitlink) )
+    def __del__(self):
+        os.system('touch tmpfile.py && rm tmpfile.py')
 
 if __name__ == '__main__':
-    processor=InfoLoader( 'sourceJsons/2016ReReco_Moriond17.json' )
+    processor=InfoLoader( 'data/2016ReReco_Moriond17.json' )
 
     print processor.ExtractProbabilityDesityValues()
     for IOFile in  processor.GetIOFiles():
