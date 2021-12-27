@@ -13,4 +13,4 @@ Prepare your json file contains two fragments :
 - 0 means 1e-10 in float.
 
 # Installation
-``sh -c "$(wget https://raw.githubusercontent.com/ltsai323/PileUpReweighter/master/install.sh -O-)" ``
+``sh -c "$(wget https://raw.githubusercontent.com/ltsai323/PileUpReweighter/main/install.sh -O-)" ``
