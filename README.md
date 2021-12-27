@@ -4,7 +4,7 @@ A json file is needed to define the inputs.
 The output is root files that contains a histogram 'mcwei_run000001'.
 
 # Usage
-``python python/PUcollector.py your.json``
+``python python/PUcollector.py your.json``  
 Prepare your json file contains two fragments :
 - "gitsource" means the files from github. The cms-sw file from SimGeneral/Mixingmodule/python
 - "dataTarget" is the local path to data pileup.
