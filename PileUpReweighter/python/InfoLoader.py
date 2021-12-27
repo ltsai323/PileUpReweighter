@@ -5,6 +5,7 @@ import os
 import PythonToolBox.PythonToolBox.LogMgr as LogMgr
 mylog=LogMgr.GetLogger(__name__)
 
+TESTMODE=False
 
 class InfoLoader(object):
     def __init__(self, jsonname):
@@ -22,6 +23,11 @@ class InfoLoader(object):
 
     def ExtractProbabilityDesityValues(self):
         tmpfile=open('tmpfile.py' ,'r')
+        wholeline=tmpfile.read()
+
+        return InfoLoader.findNumberSet_type2(wholeline)
+    def _ExtractProbabilityDesityValues(self):
+        tmpfile=open('tmpfile.py' ,'r')
 
         lines=tmpfile.readlines()
         line_binning=[ line for line in lines if 'probFunctionVariable' in line ]
@@ -29,12 +35,23 @@ class InfoLoader(object):
         if len(line_binning) != 1 or len(line_probVal) != 1:
             raise NameError('''InitLoader::ExtractInfo() : probability cannot be extracted.''')
 
-        return InfoLoader.findNumberSet(line_probVal[0])
+        return InfoLoader.findNumberSet_type1(line_probVal[0])
     def GetIOFiles(self):
         return  [ (afsfile, outname) for afsfile, outname in zip(self._afsfiles, self._outnames) ]
 
     @staticmethod
-    def findNumberSet(line):
+    def findNumberSet_type1(line):
+        lBraceIdx=line.find("(")
+        rBraceIdx=line.find(")")
+        numberStr=line[lBraceIdx:rBraceIdx+1]
+        newnumStr=numberStr.replace(' ','')
+
+        return eval(newnumStr)
+    @staticmethod
+    def findNumberSet_type2(totline):
+        line_p1=totline.replace(' ','')
+        line_p2=line_p1.replace('\n','')
+        line=line_p2[line_p2.find('probValue'):]
         lBraceIdx=line.find("(")
         rBraceIdx=line.find(")")
         numberStr=line[lBraceIdx:rBraceIdx+1]
@@ -56,6 +73,7 @@ class InfoLoader(object):
         mylog.info('downloading from github...')
         os.system( 'curl -o tmpfile.py -O %s' % (gitlink) )
     def __del__(self):
+        if TESTMODE: return
         os.system('touch tmpfile.py && rm tmpfile.py')
 
 if __name__ == '__main__':

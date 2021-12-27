@@ -27,6 +27,10 @@ def GetPUHist(ifile):
 def datanormalization(datahist):
     return sum( [datahist.GetBinContent(ibin+1) for ibin in range(datahist.GetNbinsX())] )
 
+def isZero(number):
+    if number < 1e-10: return True
+    return False
+
 def JsonFile(argv):
     if len(argv)<1+1: raise IOError(PrintHelp())
     return argv[1]
@@ -51,16 +55,21 @@ if __name__ == '__main__':
         for ibin in range(hPU_data.GetNbinsX()):
             iBin=ibin+1
             mixedPUidx=int(hPU_data.GetBinLowEdge(iBin))
+            origDataV=hPU_data.GetBinContent(iBin)
             dataPUval=float(hPU_data.GetBinContent(iBin) ) / data_normalization
 
             # only set a warning when data contains value but no MC recorded at large bin.
             if mixedPUidx < len(mixedPUvals):
                 mcPUval=float( mixedPUvals[mixedPUidx] )
-                hout.SetBinContent(iBin, dataPUval/mcPUval)
-                checkdata+=dataPUval
+
+                ### no matter how data distributed. nothing is stored in MC.
+                if isZero(mcPUval):
+                    hout.SetBinContent(iBin, 0.)
+                else:
+                    hout.SetBinContent(iBin, dataPUval/mcPUval)
+                    checkdata+=dataPUval
             else:
-                if dataPUval < 1e-6: hout.SetBinContent(iBin, 0.)
-                else: mylog.warning('filling reweight hist -- no PU mixed in MC but some record at data at bin %d' % iBin)
+                hout.SetBinContent(iBin, 0.)
         hout.Write()
         fout.Close()
 
