@@ -1,6 +1,6 @@
 {
     "gitsource":
-        "https://raw.githubusercontent.com/cms-sw/cmssw/master/SimGeneral/MixingModule/python/mix_2016_PoissonOOTPU_HighPUTrains_Fill5412_cfi.py",
+        "https://raw.githubusercontent.com/cms-sw/cmssw/master/SimGeneral/MixingModule/python/mix_2016_25ns_UltraLegacy_PoissonOOTPU_cfi.py",
     "dataTarget": [
         "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/PileUp/UltraLegacy/PileupHistogram-goldenJSON-13tev-2016-66000ub-99bins.root",
         "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/PileUp/UltraLegacy/PileupHistogram-goldenJSON-13tev-2016-69200ub-99bins.root",
