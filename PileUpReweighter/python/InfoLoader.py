@@ -12,7 +12,9 @@ class InfoLoader(object):
         #self._dir=jsonname[0: jsonname.rfind('.')] # preserve original path to the output files
         self._dir=jsonname[jsonname.rfind('/')+1: jsonname.rfind('.')] # put outputs to current directory
 
+        mylog.debug(jsonname)
         with open(jsonname,'r') as fin:
+            mylog.debug(fin)
             loadjson=json.load(fin)
             self._gitfile =loadjson['gitsource']
             self._afsfiles=loadjson['dataTarget']
@@ -70,7 +72,7 @@ class InfoLoader(object):
 
     @staticmethod
     def downloadGitFile(gitlink):
-        mylog.info('downloading from github...')
+        mylog.info('downloading from '+gitlink)
         os.system( 'curl -o tmpfile.py -O %s' % (gitlink) )
     def __del__(self):
         if TESTMODE: return
@@ -81,6 +83,6 @@ if __name__ == '__main__':
     mylog=LogMgr.GetLogger(__name__)
     processor=InfoLoader( 'data/2016ReReco_Moriond17.json' )
 
-    print processor.ExtractProbabilityDesityValues()
+    mylog.info(processor.ExtractProbabilityDesityValues())
     for iFile, oFile in  processor.GetIOFiles():
-        print 'GetIOFile() : output file: %s and input file: %s'%(oFile,iFile)
+        mylog.info('GetIOFile() : output file: %s and input file: %s'%(oFile,iFile))
